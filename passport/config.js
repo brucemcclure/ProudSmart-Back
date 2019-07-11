@@ -1,8 +1,8 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const UserModel = require("./../database/models/user_model");
-const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const {Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.serializeUser((user, done) => {
     done(null, user._id);
@@ -52,25 +52,26 @@ passport.use(new JwtStrategy(
   }
 ));
 
-// passport.use(new GoogleStrategy(
-//     {
-//         clientID: process.env.GOOGLE_CLIENT_ID,
-//         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//         callbackURL: "http://localhost:3000/auth/google/callback"
-//     },
-//     async (accessToken, refreshToken, profile, done) => {
-//         if (profile.emails && profile.emails.length > 0) {
-//             let email = profile.emails[0].value;
-//             let user = await UserModel.findOne({ email });
+passport.use(new GoogleStrategy(
+    {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "http://localhost:3000/auth/google/callback"
+    },
+    async (accessToken, refreshToken, profile, done) => {
+        if (profile.emails && profile.emails.length > 0) {
+            let email = profile.emails[0].value;
+            let user = await UserModel.findOne({ email });
 
-//             if (user) {
-//                 return done(null, user);
-//             }
+            if (user) {
+                return done(null, user);
+            }
 
-//             user = await UserModel.create({ email, password: "Testing1"});
+            user = await UserModel.create({ email, password: "Testing1"});
 
-//             return done(null, user)
-//         }
-//     }
-// ));
+            return done(null, user)
+        }
+    }
+));
+
 module.exports = passport;
