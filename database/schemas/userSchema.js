@@ -28,8 +28,9 @@ const userSchema = new Schema({
     required: true
   },
   userType: {
-    type: enaum,
-    required: true
+    type: String,
+    required: true,
+    enum: ["freeUser", "paidUser", "educator", "admin"]
   },
   purchasedCourses: {
     type: Array,
