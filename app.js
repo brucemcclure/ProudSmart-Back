@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors());
 
+// DELETE THE NEXT TWO LINES BEFORE SUBMISSION!!!!!!!!!!!!!!!!!
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
