@@ -1,7 +1,10 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
+
+app.use(cors());
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
