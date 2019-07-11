@@ -1,4 +1,4 @@
-const userSchema = new Schema({
+const UserSchema = new Schema({
   email: {
     type: String,
     required: true
@@ -13,7 +13,8 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    bcrypt: true
   },
   timeStamp: {
     type: Date,
@@ -49,3 +50,7 @@ const userSchema = new Schema({
     required: false
   }
 });
+
+UserSchema.plugin(require('mongoose-bcrypt'));
+
+module.exports = UserSchema;
