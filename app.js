@@ -19,8 +19,6 @@ app.use(morgan("combined"));
 
 app.use(passport.initialize());
 
-app.require("")
-
 app.use(require("./routes"));
 
 app.use(express.static("public"));

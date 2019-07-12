@@ -4,7 +4,10 @@ const { celebrate, Joi } = require("celebrate");
 const AuthController = require("./../controllers/auth_controller");
 const passport = require("passport");
 
-router.post("/login", AuthController.login);
+router.post("/login", passport.authenticate('local', {
+  session: false
+}), AuthController.login);
+
 router.post("/register", AuthController.register);
 router.post("/educator-application", AuthController.educatorApplication);
 
