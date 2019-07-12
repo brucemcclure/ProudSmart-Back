@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { celebrate, Joi } = require("celebrate");
 const AuthController = require("./../controllers/auth_controller");
 const passport = require("passport");
 

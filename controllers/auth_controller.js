@@ -26,13 +26,13 @@ async function educatorApplication (req, res) {
 }
 
 function login(req, res, next) {
-    const {user} = req;
-    const token = JWTService.generateToken(user);
-    return res.json(token);
+  const {user} = req;
+  const token = JWTService.generateToken(user);
+  return res.json(token);
 }
 
 module.exports = {
-    register,
-    educatorApplication,
-    login
+  register,
+  educatorApplication,
+  login
 }
