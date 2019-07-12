@@ -8,7 +8,7 @@ router.get("/users", function(req, res, next) {
   checkRole(req, res, next, ["admin"])
 }, UsersController.index);
 router.get("/dashboard", UsersController.dashboard);
-router.get("/edit-account-info", UsersController.edit-account-info);
+router.get("/edit-account-info", UsersController.editAccountInfo);
 
 
 
