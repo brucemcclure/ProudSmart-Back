@@ -1,19 +1,16 @@
 const UserModel = require("./../database/models/user_model");
 const JWTService = require("./../services/jwt_service");
 
-function register(req, res, next) {
-    const { email, password } = req.body;
-    const user = new UserModel({ email });
-
-    UserModel.register(user, password, (err, user) => {
-        if (err) {
-            return next(new HTTPError(500, err.message));
-        }
-
-        const token = JWTService.generateToken(user);
-
-        return res.json({ token });        
-    });
+async function register (req, res) {
+  let { email, password } = req.body;
+  try {
+    const user = await UserModel.create({ email, password })
+    const token = JWTService.generateToken(user);
+    
+    return res.json({token});
+  } catch (err) {
+    return res.send(err);
+  }
 }
 
 function login(req, res, next) {
@@ -24,5 +21,6 @@ function login(req, res, next) {
 
 module.exports = {
     register,
-    login
+    login,
+    logout
 }
