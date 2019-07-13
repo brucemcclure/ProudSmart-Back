@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UsersController = require("./../controllers/users_controller");
-const {checkRole} = require("./../middleware/auth_middleware")
+const {checkRole} = require("./../middleware/auth_middleware");
 
 
 router.get("/users", function(req, res, next) {
