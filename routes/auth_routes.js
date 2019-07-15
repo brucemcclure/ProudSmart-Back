@@ -8,6 +8,8 @@ router.post("/login", passport.authenticate('local', {
 }), AuthController.login);
 
 router.post("/register", AuthController.register);
+
+// Educator application not yet done
 router.post("/educator-application", AuthController.educatorApplication);
 
 
