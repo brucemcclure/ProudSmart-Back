@@ -33,7 +33,6 @@ async function educatorApplication (req, res) {
 }
 
 function login(req, res, next) {
-  console.log(req.body);
   const {user} = req;
   const token = JWTService.generateToken(user);
   return res.json(token);
