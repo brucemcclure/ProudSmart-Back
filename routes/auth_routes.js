@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { celebrate, Joi } = require("celebrate");
 const AuthController = require("./../controllers/auth_controller");
 const passport = require("passport");
 
@@ -9,6 +8,8 @@ router.post("/login", passport.authenticate('local', {
 }), AuthController.login);
 
 router.post("/register", AuthController.register);
+
+// Educator application not yet done
 router.post("/educator-application", AuthController.educatorApplication);
 
 
