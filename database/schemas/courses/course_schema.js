@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+const ChapterSchema = require("./chapter_schema.js");
 
 const CourseSchema = new Schema({
   title: {
@@ -21,15 +22,7 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-  totalStudentsEnrolled: {
-    type: Number,
-    required: true
-  },
   courseProfilePicture: {
-    type: Number,
-    required: true
-  },
-  courseDuration: {
     type: Number,
     required: true
   },
@@ -45,10 +38,7 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-  content: {
-    type: Array,
-    required: true
-  }
+  chapters: [ChapterSchema]
 });
 
 module.exports = CourseSchema;
