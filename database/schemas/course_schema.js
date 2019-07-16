@@ -26,7 +26,7 @@ const CourseSchema = new Schema({
     required: true
   },
   courseProfilePicture: {
-    type: Number,
+    type: String,
     required: true
   },
   courseDuration: {
