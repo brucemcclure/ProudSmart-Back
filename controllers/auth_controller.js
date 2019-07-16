@@ -1,6 +1,8 @@
 const UserModel = require("./../database/models/user_model");
 const JWTService = require("./../services/jwt_service");
 
+
+// register enables a site visitor to sign up for a user's account
 async function register (req, res) {
   
   let { email, firstName, lastName, password, interestTags } = req.body;
@@ -20,6 +22,7 @@ async function register (req, res) {
   }
 }
 
+// educatorApplication enables a user to apply to be a teacher
 async function educatorApplication (req, res) {
   // let { email, password } = req.body;
   // try {
@@ -32,6 +35,8 @@ async function educatorApplication (req, res) {
   // }
 }
 
+// login enables a user to login
+// authentication occurs via a JWT passport strategy
 function login(req, res, next) {  
   const {user} = req;
   const token = JWTService.generateToken(user);
