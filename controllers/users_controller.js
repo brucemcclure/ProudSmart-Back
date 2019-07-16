@@ -14,10 +14,10 @@ async function index (req, res) {
 //   > The courses recommeneded to the user
 async function dashboard () {};
 
-// editAccountInfo returns data for the user's edit account information page
+// accountInfo returns data for the user's edit account information page
 // the data is used to autocomplete the form with the user's current account information
 // note the route to update the user's information in the database is in the auth routes (edit)
-function editAccountInfo (req, res) {
+function accountInfo (req, res) {
   return res.json(req.user);
 };
 
@@ -25,5 +25,5 @@ function editAccountInfo (req, res) {
 module.exports = {
   index,
   dashboard,
-  editAccountInfo
+  accountInfo
 };
