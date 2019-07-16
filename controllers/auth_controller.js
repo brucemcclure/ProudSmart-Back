@@ -14,7 +14,7 @@ async function register (req, res) {
     const user = await UserModel.create({ email, firstName, lastName, password, profilePhoto, interestTags })
     const token = JWTService.generateToken(user);
     
-    return res.json({token});
+    return res.json(token);
   } catch (err) {
     return res.send(err);
   }
@@ -32,7 +32,7 @@ async function educatorApplication (req, res) {
   // }
 }
 
-function login(req, res, next) {
+function login(req, res, next) {  
   const {user} = req;
   const token = JWTService.generateToken(user);
   return res.json(token);
