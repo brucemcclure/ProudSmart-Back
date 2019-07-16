@@ -75,9 +75,6 @@ async function create (req, res) {
   }
 };
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// UPDATE IS CURRENTLY BROKEN -> UPDATES THE COURSE BUT BREAKS THE NESTED SUB DOCUMENT STRUCTURE
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // update a course in the database
 async function update (req, res) {
   const {
