@@ -23,7 +23,7 @@ router.get("/dashboard/:id", passport.authenticate("jwt", {session: false}), Cou
 //   > Educator approved for the given topic (e.g. Machine Learning)
 //   > Admin
 // ADD IN AUTH MIDDLEWEAR TO CHECK THE ABOVE
-router.post("/courses", passport.authenticate("jwt", {session: false}), CoursesController.create);
-router.put("/courses/:id", passport.authenticate("jwt", {session: false}), CoursesController.update);
+router.post("/", passport.authenticate("jwt", {session: false}), CoursesController.create);
+router.put("/:id", passport.authenticate("jwt", {session: false}), CoursesController.update);
 
 module.exports = router;

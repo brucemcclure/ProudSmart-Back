@@ -18,12 +18,12 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-  materials: {
+  materialsUrl: {
     type: Array,
     required: true
   },
-  courseProfilePicture: {
-    type: Number,
+  courseProfilePictureUrl: {
+    type: String,
     required: true
   },
   certified: {
@@ -38,7 +38,10 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-  chapters: [ChapterSchema]
+  chapters: [ChapterSchema],
+  approved: {
+    type: Boolean
+  }
 });
 
 module.exports = CourseSchema;
