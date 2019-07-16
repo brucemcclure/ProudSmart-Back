@@ -21,7 +21,7 @@ passport.use(new LocalStrategy({
     usernameField: "email"
     },
     async (email, password, done) => {
-        console.log(email, password);
+        // console.log(email, password);
         try {
             const user = await UserModel.findOne({ email })
 
