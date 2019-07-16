@@ -1,3 +1,5 @@
+const { Schema } = require("mongoose");
+
 const CourseSchema = new Schema({
   title: {
     type: String,
@@ -48,3 +50,5 @@ const CourseSchema = new Schema({
     required: true
   }
 });
+
+module.exports = CourseSchema;
