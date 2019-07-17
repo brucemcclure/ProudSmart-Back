@@ -39,8 +39,14 @@ async function show (req, res) {
 };
 
 // dashboard returns a response object containing all the information for a given course
-async function dashboard (req, res) {
-  let course = await CourseModel.findById(req.params.id);
+async function dashboard (req, res, next) {
+  const {user} = req;
+  try {
+    let course = await CourseModel.findById(req.params.id);
+  } catch (err) {
+    return next(err)
+  }
+  
   return res.json(course);
 };
 

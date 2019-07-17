@@ -14,6 +14,10 @@ const CourseSchema = new Schema({
     type: String,
     required: true
   },
+  teacherId: {
+    type: String,
+    required: true
+  },
   interestTags: {
     type: Array,
     required: true

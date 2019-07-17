@@ -62,6 +62,37 @@ const qualifications = [
   "Honorary Doctoral Degree"
 ];
 
+const generateEducators = async () => {
+  const educators = [];
+  for (let i = 0; i < 10; i++) {
+    console.log(`Creating educator ${i + 1}`);
+    const user = new UserModel({
+      email: faker.internet.email(),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      password: "mrpickles", //this well need to be addressed
+      profilePhotoUrl: faker.internet.url(),
+      interestTags: _.sampleSize(interestTags, 2),
+      userType: "educator",
+      //needs to be addressesd
+      qualifications: _.sampleSize(qualifications, 3),
+      aboutMe: faker.lorem.paragraph(),
+      teachingTags: _.sampleSize(qualifications, 3)
+    });
+    educators.push(user);
+    const saveUser = async () => {
+      try {
+        await user.save();
+      } catch {
+        console.log("********ERROR***********");
+      }
+    };
+    saveUser();
+  }
+  return educators;
+};
+
+
 const generateTopics = () => {
   let topics = [];
   for (let i = 0; i < 100; i++) {
@@ -77,8 +108,7 @@ const generateTopics = () => {
   return topics;
 }
 
-const generateChapters = (generateTopics) => {
-  let topics = generateTopics();
+const generateChapters = (topics) => {
   let chapters = [];
   for (let i = 0; i < 100; i++) {
     console.log(`Creating chapters ${i + 1}`);
@@ -93,9 +123,8 @@ const generateChapters = (generateTopics) => {
   return chapters;
 };
 
-const chapters = generateChapters(generateTopics);
 
-const generateCourses = async () => {
+const generateCourses = async (chapters, educators) => {
   let courses = [];
   for (let i = 0; i < 10; i++) {
     console.log(`Creating courses ${i + 1}`);
@@ -103,6 +132,7 @@ const generateCourses = async () => {
       title: _.sampleSize(courseTitles, 1),
       description: faker.lorem.paragraph(),
       teacher: "chicken",
+      teacherId: educators[_.random(1,educators.length-1)].id,
       interestTags: _.sampleSize(interestTags, 3),
       materialsUrl: _.sampleSize(materials, 2),
       courseProfilePictureUrl: "www.chicken.com",
@@ -126,8 +156,7 @@ const generateCourses = async () => {
   return courses;
 }
 
-const pickPurchasedCourses = async () => {
-  let courses = await generateCourses();
+const pickPurchasedCourses = async (courses) => {
   let purchasedCourses = [];
   for (i = 0; i < _.random(1,courses.length); i++) {
     let randNum = _.random(1, courses.length-1);
@@ -143,8 +172,7 @@ const pickPurchasedCourses = async () => {
   return purchasedCourses;
 }
 
-const generateUsers = async () => {
-  purchases = await pickPurchasedCourses();
+const generateUsers = async (purchasedCourses) => {
   let users = [];
   for (let i = 0; i < 10; i++) {
     console.log(`Creating user ${i + 1}`);
@@ -155,14 +183,17 @@ const generateUsers = async () => {
       password: "mrpickles", //this well need to be addressed
       profilePhotoUrl: faker.internet.url(),
       interestTags: _.sampleSize(interestTags, 2),
-      purchasedCourses: _.sampleSize(purchases,3) //needs to be addressesd
+      purchasedCourses: _.sampleSize(purchasedCourses,3)
     });
     // console.log(user.purchasedCourses)
-    try {
-      await user.save();
-    } catch (err) {
-      console.log(err);
-    }
+    const saveUser = async () => {
+      try {
+        await user.save();
+      } catch {
+        console.log("********ERROR***********");
+      }
+    };
+    saveUser();
     users.push(user);
     
   };
@@ -171,34 +202,16 @@ const generateUsers = async () => {
   return users;
 }
 
-const users = generateUsers();
-
-const educators = [];
-for (let i = 0; i < 10; i++) {
-  console.log(`Creating educator ${i + 1}`);
-  const user = new UserModel({
-    email: faker.internet.email(),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    password: "mrpickles", //this well need to be addressed
-    profilePhotoUrl: faker.internet.url(),
-    interestTags: _.sampleSize(interestTags, 2),
-    userType: "educator",
-    //needs to be addressesd
-    qualifications: _.sampleSize(qualifications, 3),
-    aboutMe: faker.lorem.paragraph(),
-    teachingTags: _.sampleSize(qualifications, 3)
-  });
-
-  const saveUser = async () => {
-    try {
-      await user.save();
-    } catch {
-      console.log("********ERROR***********");
-    }
-  };
-  saveUser();
+const populateDatabase = async () => {
+  const educators = await generateEducators();
+  const topics = generateTopics();
+  const chapters = generateChapters(topics);
+  const courses = await generateCourses(chapters, educators);
+  const purchasedCourses = await pickPurchasedCourses(courses);
+  const users = await generateUsers(purchasedCourses);
 }
+
+populateDatabase();
 
 // Promise.all(courses)
 //   .then(courses => {

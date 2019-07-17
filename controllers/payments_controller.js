@@ -1,5 +1,4 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
-const UserModel = require("./../database/models/user_model.js");
 
 // updatePurchasedCourses updates a given user's purchased courses upon successful payment
 // this is called in the charge function 
