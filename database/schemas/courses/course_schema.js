@@ -39,6 +39,10 @@ const CourseSchema = new Schema({
     required: true
   },
   chapters: [ChapterSchema],
+  price: {
+    type: Number,
+    required: true
+  },
   approved: {
     type: Boolean
   }
