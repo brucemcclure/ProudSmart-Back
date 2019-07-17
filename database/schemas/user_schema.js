@@ -45,7 +45,7 @@ const UserSchema = new Schema({
 },
 {
   timestamps: true
-},);
+});
 
 UserSchema.plugin(require('mongoose-bcrypt'));
 

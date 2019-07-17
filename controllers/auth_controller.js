@@ -5,7 +5,12 @@ const JWTService = require("./../services/jwt_service");
 // register enables a site visitor to sign up for a user's account
 async function register (req, res) {
   
-  let { email, firstName, lastName, password, interestTags } = req.body;
+  let { 
+    email, 
+    firstName, 
+    lastName, 
+    password, 
+    interestTags } = req.body;
   
   
   // The following line should be deleted once AWS is setup
@@ -13,7 +18,14 @@ async function register (req, res) {
   let profilePhoto = req.body.photo.file.uid;
   
   try {
-    const user = await UserModel.create({ email, firstName, lastName, password, profilePhoto, interestTags })
+    const user = await UserModel.create({ 
+      email, 
+      firstName, 
+      lastName, 
+      password, 
+      profilePhoto, 
+      interestTags });
+      
     const token = JWTService.generateToken(user);
     
     return res.json(token);
