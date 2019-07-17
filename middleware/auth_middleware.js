@@ -9,6 +9,7 @@ function checkRole(req, res, next, permittedRoles) {
   return next(new HTTPError(422, "Unauthorised"))
 }
 
+
 module.exports = {
   checkRole
 }
