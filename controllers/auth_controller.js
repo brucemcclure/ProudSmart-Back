@@ -15,7 +15,7 @@ async function register (req, res) {
   
   // The following line should be deleted once AWS is setup
   // This is just to test the register form in the front end application
-  let profilePhoto = req.body.photo.file.uid;
+  let profilePhotoUrl = req.body.photo.file.uid;
   
   try {
     const user = await UserModel.create({ 
@@ -23,7 +23,7 @@ async function register (req, res) {
       firstName, 
       lastName, 
       password, 
-      profilePhoto, 
+      profilePhotoUrl, 
       interestTags });
       
     const token = JWTService.generateToken(user);
@@ -54,6 +54,8 @@ function login(req, res, next) {
   const token = JWTService.generateToken(user);
   return res.json(token);
 }
+
+// need an edit function
 
 module.exports = {
   register,
