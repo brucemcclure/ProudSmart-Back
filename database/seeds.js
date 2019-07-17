@@ -131,8 +131,8 @@ const generateCourses = async (chapters, educators) => {
     const course = new CourseModel({
       title: _.sampleSize(courseTitles, 1),
       description: faker.lorem.paragraph(),
-      teacher: "chicken",
-      teacherId: educators[_.random(1,educators.length-1)].id,
+      educator: "chicken",
+      educatorId: educators[_.random(1,educators.length-1)].id,
       interestTags: _.sampleSize(interestTags, 3),
       materialsUrl: _.sampleSize(materials, 2),
       courseProfilePictureUrl: "www.chicken.com",

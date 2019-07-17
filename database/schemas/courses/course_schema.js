@@ -10,11 +10,11 @@ const CourseSchema = new Schema({
     type: String,
     required: true
   },
-  teacher: {
+  educator: {
     type: String,
     required: true
   },
-  teacherId: {
+  educatorId: {
     type: String,
     required: true
   },
