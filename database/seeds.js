@@ -134,6 +134,7 @@ const pickPurchasedCourses = async () => {
     // console.log(`courses length is ${courses.length}. RandNum is ${randNum}`);
     let randomCourse = courses[randNum]; 
     purchasedCourses.push({
+      courseId: randomCourse.id,
       title: randomCourse.title,
       courseProfilePictureUrl: randomCourse.courseProfilePictureUrl,
       description: randomCourse.description
