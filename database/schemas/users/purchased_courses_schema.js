@@ -1,6 +1,10 @@
 const { Schema } = require("mongoose");
 
 const PurchasedCoursesSchema = new Schema({
+  courseId: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true
