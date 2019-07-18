@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const CoursesController = require("../controllers/courses_controller");
-const {checkRole} = require("./../middleware/auth_middleware");
+const {checkCourseOwner} = require("./../middleware/auth_middleware.js");
 const passport = require("passport");
 
 // Route to request a list of all the courses in the database
@@ -31,11 +31,13 @@ router.get(
 router.post(
   "/", 
   passport.authenticate("jwt", {session: false}), 
+  checkCourseOwner,
   CoursesController.create
 );
 router.put(
   "/:id", 
   passport.authenticate("jwt", {session: false}), 
+  checkCourseOwner,
   CoursesController.update
 );
 
