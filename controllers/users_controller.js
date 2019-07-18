@@ -12,7 +12,10 @@ async function index (req, res) {
 // two variables are returned
 //   > The courses the user has purchased
 //   > The courses recommeneded to the user
-async function dashboard () {};
+// STILL TO IMPLEMENT RECOMMENDED COURSES
+async function dashboard () {
+  return res.send(req.user);
+};
 
 // accountInfo returns data for the user's edit account information page
 // the data is used to autocomplete the form with the user's current account information

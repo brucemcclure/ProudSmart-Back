@@ -10,7 +10,11 @@ const CourseSchema = new Schema({
     type: String,
     required: true
   },
-  teacher: {
+  educator: {
+    type: String,
+    required: true
+  },
+  educatorId: {
     type: String,
     required: true
   },
@@ -22,21 +26,8 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-<<<<<<< HEAD:database/schemas/courses/course_schema.js
   courseProfilePictureUrl: {
     type: String,
-=======
-  totalStudentsEnrolled: {
-    type: Number,
-    required: true
-  },
-  courseProfilePicture: {
-    type: String,
-    required: true
-  },
-  courseDuration: {
-    type: Number,
->>>>>>> e35b1aa033913c8cfa531a7b5c49360ac7249374:database/schemas/course_schema.js
     required: true
   },
   certified: {
@@ -52,6 +43,10 @@ const CourseSchema = new Schema({
     required: true
   },
   chapters: [ChapterSchema],
+  price: {
+    type: Number,
+    required: true
+  },
   approved: {
     type: Boolean
   }
