@@ -31,6 +31,11 @@ const UserSchema = new Schema({
     enum: ["user", "educator", "admin"],
     default: "user"
   },
+  educatorStatus: {
+    type: String,
+    enum: ["not", "applied", "approved"],
+    default: "not"
+  },
   purchasedCourses: [PurchasedCoursesSchema],
   qualifications: {
     type: Array

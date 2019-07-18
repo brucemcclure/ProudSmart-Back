@@ -9,7 +9,22 @@ function checkRole(req, res, next, permittedRoles) {
   return next(new HTTPError(422, "Unauthorised"))
 }
 
+// checkCourseOwner restricts the ability to edit to coure information unless the user is either:
+//   > Admin; or
+//   > The educator of that course
+// Note this function expects educatorId to come through as a form value
+function checkCourseOwner(req, res, next) {
+  const {educatorId} = req.body;
+  const {user} = req.user;
+  if (user.userType === "admin" || user.id === educatorId) {
+    return next();
+  }
+
+  return next(new HTTPError(422, "Unauthorised"))
+}
+
 
 module.exports = {
-  checkRole
+  checkRole,
+  checkCourseOwner
 }

@@ -35,16 +35,19 @@ async function register (req, res) {
 }
 
 // educatorApplication enables a user to apply to be a teacher
+// educatorApplication expects qualifications, aboutMe and teachingTags form data in the request object
 async function educatorApplication (req, res) {
-  // let { email, password } = req.body;
-  // try {
-  //   const user = await UserModel.create({ email, password })
-  //   const token = JWTService.generateToken(user);
-    
-  //   return res.json({token});
-  // } catch (err) {
-  //   return res.send(err);
-  // }
+  const {user} = req;
+  const {qualifications, aboutMe, teachingTags} = req.body;
+  user.qualifications = qualifications;
+  user.aboutMe = aboutMe;
+  user.teachingTags = teachingTags;
+  try {
+    await user.save;
+    return res.json(user);
+  } catch (err) {
+    return res.send(err);
+  }
 }
 
 // login enables a user to login
@@ -55,10 +58,49 @@ function login(req, res, next) {
   return res.json(token);
 }
 
-// need an edit function
+// edit enables a user to edit account information
+async function update (req, res) {
+  
+  const { 
+    email, 
+    firstName, 
+    lastName, 
+    password, 
+    interestTags,
+    educatorStatus,
+    qualifications,
+    aboutMe,
+    teachingTags 
+  } = req.body;
+  
+  
+  // The following line should be deleted once AWS is setup
+  // This is just to test the register form in the front end application
+  // let profilePhotoUrl = req.body.photo.file.uid;
+  
+  const {user} = req;
+  user.email = email;
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.password = password;
+  user.interestTags = interestTags;
+  user.educatorStatus = educatorStatus;
+  user.qualifications = qualifications;
+  user.aboutMe = aboutMe;
+  user.teachingTags = teachingTags;
+
+
+  try {
+    user.save()
+    return res.json(user);
+  } catch (err) {
+    return res.send(err);
+  }
+}
 
 module.exports = {
   register,
   educatorApplication,
-  login
+  login,
+  update
 }
