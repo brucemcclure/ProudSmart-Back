@@ -43,23 +43,24 @@ async function dashboard (req, res, next) {
   const {user} = req;
   try {
     let course = await CourseModel.findById(req.params.id);
+    // if the user is an admin or the educator of the course then return the data
+    if ((user.userType === "admin") || (user.id === course.educatorId)) {
+      return res.json(course)
+    }
+    
+    // else if the user has the course in their purchasedCourses then return the data
+    for (let course of user.purchasedCourses) {
+      if (course.id === req.params.id) {
+        return res.json(course)
+      }
+    }
+    
+    // deny user access to the course
+    return next(new HTTPError(422, "Unauthorised"));
+
   } catch (err) {
     return next(err)
   }
-
-  // if the user is an admin or the educator of the course then return the data
-  if ((user.userType === "admin") || (user.id === course.educatorId)) {
-    return res.json(course)
-  } 
-
-  // else if the user has the course in their purchasedCourses then return the data
-  for (let course of user.purchasedCourses) {
-    if (course.id === req.params.id) {
-      return res.json(course)
-    }
-  }
-  
-  return next(new HTTPError(422, "Unauthorised"));
 };
 
 // create a new course in the database
