@@ -35,16 +35,19 @@ async function register (req, res) {
 }
 
 // educatorApplication enables a user to apply to be a teacher
+// educatorApplication expects qualifications, aboutMe and teachingTags form data in the request object
 async function educatorApplication (req, res) {
-  // let { email, password } = req.body;
-  // try {
-  //   const user = await UserModel.create({ email, password })
-  //   const token = JWTService.generateToken(user);
-    
-  //   return res.json({token});
-  // } catch (err) {
-  //   return res.send(err);
-  // }
+  const {user} = req;
+  const {qualifications, aboutMe, teachingTags} = req.body;
+  user.qualifications = qualifications;
+  user.aboutMe = aboutMe;
+  user.teachingTags = teachingTags;
+  try {
+    await user.save;
+    return res.json(user);
+  } catch (err) {
+    return res.send(err);
+  }
 }
 
 // login enables a user to login

@@ -23,11 +23,11 @@ router.get(
   CoursesController.dashboard
 );
 
-// Routes to create and update a course in the database
+// Routes to create, update and delete a course in the database
 // These routes should only be accessible to the following users:
-//   > Educator approved for the given topic (e.g. Machine Learning)
+//   > Educator of the course (e.g. Machine Learning)
 //   > Admin
-// ADD IN AUTH MIDDLEWEAR TO CHECK THE ABOVE
+
 router.post(
   "/", 
   passport.authenticate("jwt", {session: false}), 
@@ -39,6 +39,12 @@ router.put(
   passport.authenticate("jwt", {session: false}), 
   checkCourseOwner,
   CoursesController.update
+);
+router.delete(
+  "/:id", 
+  passport.authenticate("jwt", {session: false}), 
+  checkCourseOwner,
+  CoursesController.destroy
 );
 
 module.exports = router;

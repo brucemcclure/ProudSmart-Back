@@ -135,10 +135,22 @@ async function update(req, res) {
   }
 }
 
+// delete a course in the database
+async function destroy(req, res) {
+  try {
+    let course = CourseModel.findByIdAndDelete(req.params.id);
+    course.save();
+    return res.json(course);
+  } catch (err) {
+    return res.send(err);
+  }
+}
+
 module.exports = {
   index,
   show,
   dashboard,
   create,
-  update
+  update,
+  destroy
 };
