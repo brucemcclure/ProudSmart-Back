@@ -10,10 +10,10 @@ async function index (req, res) {
 
 // dashboard returns data for the current user's dashboard page
 // two variables are returned
-//   > The courses the user has purchased
+//   > All the user document; and
 //   > The courses recommeneded to the user
-// STILL TO IMPLEMENT RECOMMENDED COURSES
 async function dashboard () {
+  // STILL TO IMPLEMENT RECOMMENDED COURSES
   return res.send(req.user);
 };
 

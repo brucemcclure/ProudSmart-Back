@@ -31,6 +31,10 @@ const UserSchema = new Schema({
     enum: ["user", "educator", "admin"],
     default: "user"
   },
+  educatorApproval: {
+    type: Boolean,
+    default: false
+  },
   purchasedCourses: [PurchasedCoursesSchema],
   qualifications: {
     type: Array
