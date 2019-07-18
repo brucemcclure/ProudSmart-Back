@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+const ChapterSchema = require("./chapter_schema.js");
 
 const CourseSchema = new Schema({
   title: {
@@ -9,7 +10,11 @@ const CourseSchema = new Schema({
     type: String,
     required: true
   },
-  teacher: {
+  educator: {
+    type: String,
+    required: true
+  },
+  educatorId: {
     type: String,
     required: true
   },
@@ -17,20 +22,12 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-  materials: {
+  materialsUrl: {
     type: Array,
     required: true
   },
-  totalStudentsEnrolled: {
-    type: Number,
-    required: true
-  },
-  courseProfilePicture: {
-    type: Number,
-    required: true
-  },
-  courseDuration: {
-    type: Number,
+  courseProfilePictureUrl: {
+    type: String,
     required: true
   },
   certified: {
@@ -45,9 +42,13 @@ const CourseSchema = new Schema({
     type: Array,
     required: true
   },
-  content: {
-    type: Array,
+  chapters: [ChapterSchema],
+  price: {
+    type: Number,
     required: true
+  },
+  approved: {
+    type: Boolean
   }
 });
 

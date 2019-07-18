@@ -8,14 +8,13 @@ const passport = require("./config/passport");
 app.use(cors());
 
 // DELETE THE NEXT TWO LINES BEFORE SUBMISSION!!!!!!!!!!!!!!!!!
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(morgan("combined"));
-
 
 app.use(passport.initialize());
 
