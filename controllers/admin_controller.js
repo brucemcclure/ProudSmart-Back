@@ -28,14 +28,13 @@ async function courseApplications(req, res) {
     return res.send(err);
   }
 };
-};
 
 // approval enables the admin to approve either a course or an educator 
 // approval expects two pieces of data in the body of the request:
 //   > the type of document (i.e. user or course)
 //   > the document to approve
 // The approved document is returned in the response object
-async function approval(req, res) {
+async function approve(req, res) {
   const {type, document} = req.body;
   if (type === "user") {
     document.educatorStatus = "approved"
@@ -53,5 +52,5 @@ async function approval(req, res) {
 module.exports = {
   educatorApplications,
   courseApplications,
-  approval
+  approve
 }

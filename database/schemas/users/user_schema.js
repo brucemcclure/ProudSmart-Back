@@ -32,6 +32,7 @@ const UserSchema = new Schema({
     default: "user"
   },
   educatorStatus: {
+    type: String,
     enum: ["not", "applied", "approved"],
     default: "not"
   },
