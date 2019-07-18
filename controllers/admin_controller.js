@@ -3,17 +3,31 @@ const CourseModel = require("./../database/models/course_model");
 
 // educatorApplications returns an array of user records representing the outstanding applications to be an educator
 // An outstanding application is found by querying the database for user records where the following criteria is met:
-//   > The educator fields on the user record contain values (the user has submitted an educator application); and
-//   > The educatorApproval is false (the admin has not approved the user to be an educator)
-async function educatorApplications() {
-
+//   > educatorStatus is "applied" 
+async function educatorApplications(req, res) {
+  try {
+    const educatorApplications = UserModel.find(
+      {educatorStatus: "applied"}
+    )
+    return res.json(educatorApplications);       
+  } catch (err) {
+    return res.send(err);
+  }
 };
 
 // courseApplications returns an array of course records which have not been approved by the admin.
 // An outstanding course application is found by querying the database for course records where the following criterai is met:
 //   > approved is false (the admin has not approved the course)
-async function courseApplications() {
-
+async function courseApplications(req, res) {
+  try {
+    const courseApplications = CourseModel.find(
+      {approved: false}
+    )
+    return res.json(courseApplications);       
+  } catch (err) {
+    return res.send(err);
+  }
+};
 };
 
 // approval enables the admin to approve either a course or an educator 
@@ -24,7 +38,7 @@ async function courseApplications() {
 async function approval(req, res) {
   const {type, document} = req.body;
   if (type === "user") {
-    document.educatorApproval = true
+    document.educatorStatus = "approved"
   } else {
     document.approved = true
   }
