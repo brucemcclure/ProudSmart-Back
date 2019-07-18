@@ -1,74 +1,74 @@
 const CourseModel = require("./../database/models/course_model");
 
 // index returns a response with basic information (e.g. title and description) of each course in the database
-async function index (req, res) {
-  const courses = await CourseModel.find({}, {
-    title: 1,
-    description: 1,
-    educator: 1,
-    interestTags: 1,
-    price: 1
-  });
+async function index(req, res) {
+  const courses = await CourseModel.find(
+    {},
+    {
+      title: 1,
+      description: 1,
+      educator: 1,
+      interestTags: 1,
+      price: 1
+    }
+  );
   return res.json(courses);
-};
+}
 
 // show returns a response with information for the user to preview a course
-async function show (req, res) {
+async function show(req, res) {
   try {
     const course = await CourseModel.findById(req.params.id, {
-      title: 1, 
+      title: 1,
       description: 1,
-      educator: 1, 
+      educator: 1,
       interestTags: 1,
       courseProfilePictureUrl: 1,
       certified: 1,
       recommendedPrerequisites: 1,
       keyConcepts: 1,
-      'chapters.title': 1,
-      'chapters.description': 1,
-      'chapters.topics.title': 1,
-      'chapters.topics.description': 1,
+      "chapters.title": 1,
+      "chapters.description": 1,
+      "chapters.topics.title": 1,
+      "chapters.topics.description": 1,
       price: 1
     });
 
     return res.json(course);
-
   } catch (err) {
-    return res.send(err)
+    return res.send(err);
   }
-};
+}
 
 // dashboard returns a response object containing all the information for a given course
-async function dashboard (req, res, next) {
-  const {user} = req;
+async function dashboard(req, res, next) {
+  const { user } = req;
   try {
     let course = await CourseModel.findById(req.params.id);
     // if the user is an admin or the educator of the course then return the data
-    if ((user.userType === "admin") || (user.id === course.educatorId)) {
-      return res.json(course)
+    if (user.userType === "admin" || user.id === course.educatorId) {
+      return res.json(course);
     }
-    
     // else if the user has the course in their purchasedCourses then return the data
-    for (let course of user.purchasedCourses) {
-      if (course.id === req.params.id) {
-        return res.json(course)
+    for (let purchasedCourse of user.purchasedCourses) {
+      if (purchasedCourse.courseId === req.params.id) {
+        return res.json(course);
       }
     }
-    
+
     // deny user access to the course
     return next(new HTTPError(422, "Unauthorised"));
-
   } catch (err) {
-    return next(err)
+    return next(err);
   }
-};
+}
 
 // create a new course in the database
-async function create (req, res) {
+async function create(req, res) {
   const {
-    title, 
+    title,
     description,
-    educator, 
+    educator,
     interestTags,
     materialsUrl,
     courseProfilePictureUrl,
@@ -77,7 +77,7 @@ async function create (req, res) {
     keyConcepts,
     chapters,
     price
-   } = req.body;
+  } = req.body;
   try {
     const course = await CourseModel.create({
       title,
@@ -95,16 +95,16 @@ async function create (req, res) {
     });
     return res.json(course);
   } catch (err) {
-    return res.send(err)
+    return res.send(err);
   }
-};
+}
 
 // update a course in the database
-async function update (req, res) {
+async function update(req, res) {
   const {
-    title, 
+    title,
     description,
-    teacher, 
+    teacher,
     interestTags,
     materialsUrl,
     courseProfilePictureUrl,
@@ -113,7 +113,7 @@ async function update (req, res) {
     keyConcepts,
     chapters,
     price
-   } = req.body;
+  } = req.body;
   try {
     course = await CourseModel.findByIdAndUpdate(req.params.id, {
       title,
@@ -133,7 +133,7 @@ async function update (req, res) {
   } catch (err) {
     return res.send(err);
   }
-};
+}
 
 module.exports = {
   index,
@@ -141,4 +141,4 @@ module.exports = {
   dashboard,
   create,
   update
-}
+};
