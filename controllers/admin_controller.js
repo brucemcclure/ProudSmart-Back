@@ -37,7 +37,8 @@ async function courseApplications(req, res) {
 async function approve(req, res) {
   const {type, document} = req.body;
   if (type === "user") {
-    document.educatorStatus = "approved"
+    document.educatorStatus = "approved";
+    document.userType = "educator";
   } else {
     document.approved = true
   }

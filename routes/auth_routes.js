@@ -24,5 +24,12 @@ router.put(
   AuthController.educatorApplication
 );
 
+// route to enable a user to update their account information
+router.put(
+  "/update",
+  passport.authenticate("jwt", {session: false}),
+  AuthController.update
+)
+
 
 module.exports = router;

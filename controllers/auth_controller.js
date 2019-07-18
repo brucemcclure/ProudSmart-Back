@@ -58,10 +58,49 @@ function login(req, res, next) {
   return res.json(token);
 }
 
-// need an edit function
+// edit enables a user to edit account information
+async function update (req, res) {
+  
+  const { 
+    email, 
+    firstName, 
+    lastName, 
+    password, 
+    interestTags,
+    educatorStatus,
+    qualifications,
+    aboutMe,
+    teachingTags 
+  } = req.body;
+  
+  
+  // The following line should be deleted once AWS is setup
+  // This is just to test the register form in the front end application
+  // let profilePhotoUrl = req.body.photo.file.uid;
+  
+  const {user} = req;
+  user.email = email;
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.password = password;
+  user.interestTags = interestTags;
+  user.educatorStatus = educatorStatus;
+  user.qualifications = qualifications;
+  user.aboutMe = aboutMe;
+  user.teachingTags = teachingTags;
+
+
+  try {
+    user.save()
+    return res.json(user);
+  } catch (err) {
+    return res.send(err);
+  }
+}
 
 module.exports = {
   register,
   educatorApplication,
-  login
+  login,
+  update
 }
