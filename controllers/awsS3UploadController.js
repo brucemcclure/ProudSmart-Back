@@ -53,5 +53,48 @@ function checkImgFileType(file, cb) {
     cb("Error: Images Only!");
   }
 }
+////////////////////single Video file upload controller
+const videoUpload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "proudsmarts3bucket/videos",
+    acl: "public-read",
+    key: function(req, file, cb) {
+      cb(
+        null,
+        path.basename(file.originalname, path.extname(file.originalname)) +
+          "-" +
+          Date.now() +
+          path.extname(file.originalname)
+      );
+    }
+  }),
+  //size in bytes: 2000000 bytes = 2 MB, comment the limits if you don't wanna set limits for you file.
+  limits: { fileSize: 100000000 },
+  fileFilter: function(req, file, cb) {
+    checkVideoFileType(file, cb);
+  }
+}).single("singleVideo");
 
-module.exports = { profileImgUpload };
+/**
+ * checkVideoFileType
+ */
+function checkVideoFileType(file, cb) {
+  // Allowed ext, only allow mp4 video to be uploaded
+  const filetypes = /mp4/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  /**  Check mime
+   * A MIME type is a label used to identify a type of data. It is used so software can know how to handle the data. It serves the same purpose on the Internet that file extensions do on Microsoft Windows.
+   * So if a server says "This is text/html" the client can go "Ah, this is an HTML document, I can render that internally", while if the server says "This is application/pdf" the client can go "Ah, I need to launch the FoxIt PDF Reader plugin that the user has installed and that has registered itself as the application/pdf handler."
+   */
+  const mimetype = filetypes.test(file.mimetype);
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error: A single mp4 video Only!");
+  }
+}
+//////////////
+
+module.exports = { profileImgUpload, videoUpload };

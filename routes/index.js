@@ -6,6 +6,7 @@ const CoursesRoutes = require("./courses_routes");
 const PaymentsRoutes = require("./payments_routes");
 const AdminRoutes = require("./admin_routes.js");
 const ProfileImgRoutes = require("./profileImage_routes");
+const videoRoutes = require("./courseVideo_routes");
 const passport = require("passport");
 const { checkRole } = require("./../middleware/auth_middleware");
 
@@ -38,5 +39,6 @@ router.use(
 );
 
 router.use("/image-upload", ProfileImgRoutes); //Joshua, change this test to a proper router name if you want
+router.use("/video-upload", videoRoutes);
 
 module.exports = router;
