@@ -5,15 +5,13 @@ const UsersRoutes = require("./users_routes");
 const CoursesRoutes = require("./courses_routes");
 const PaymentsRoutes = require("./payments_routes");
 const AdminRoutes = require("./admin_routes.js");
+const ProfileImgRoutes = require("./profileImage_routes");
 const passport = require("passport");
-const {checkRole} = require("./../middleware/auth_middleware");
+const { checkRole } = require("./../middleware/auth_middleware");
 
 router.get("/", (req, res) => res.send("Welcome"));
 
-router.use(
-  "/auth", 
-  AuthRoutes
-);
+router.use("/auth", AuthRoutes);
 
 router.use(
   "/users",
@@ -21,14 +19,11 @@ router.use(
   UsersRoutes
 );
 
-router.use(
-  "/courses", 
-  CoursesRoutes
-);
+router.use("/courses", CoursesRoutes);
 
 router.use(
-  "/payments", 
-  passport.authenticate("jwt", { session: false }), 
+  "/payments",
+  passport.authenticate("jwt", { session: false }),
   PaymentsRoutes
 );
 
@@ -40,6 +35,8 @@ router.use(
     checkRole(req, res, next, ["admin"]);
   },
   AdminRoutes
-)
+);
+
+router.use("/image-upload", ProfileImgRoutes); //Joshua, change this test to a proper router name if you want
 
 module.exports = router;
