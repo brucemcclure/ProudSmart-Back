@@ -203,6 +203,7 @@ const generateUsers = async (purchasedCourses) => {
 }
 
 const populateDatabase = async () => {
+  
   const educators = await generateEducators();
   const topics = generateTopics();
   const chapters = generateChapters(topics);
