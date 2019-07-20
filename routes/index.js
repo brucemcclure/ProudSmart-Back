@@ -38,7 +38,14 @@ router.use(
   AdminRoutes
 );
 
-router.use("/image-upload", ProfileImgRoutes); //Joshua, change this test to a proper router name if you want
-router.use("/video-upload", videoRoutes);
+router.use(
+  "/image-upload", 
+  ProfileImgRoutes
+); //Joshua, change this test to a proper router name if you want
+
+router.use(
+  "/video-upload", 
+  videoRoutes
+);
 
 module.exports = router;

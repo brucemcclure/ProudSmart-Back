@@ -19,12 +19,20 @@ router.get(
   UsersController.dashboard
 );
 
-//  route to request the user's current information 
+// route to request the user's current information 
 router.get(
   "/account-info", 
   UsersController.accountInfo
 );
 
+// rotue to request all of the educators and educator applications in the database
+router.get(
+  "/educators",
+  function(req, res, next) {
+    checkRole(req, res, next, ["admin"]);
+  },
+  UsersController.educatorIndex
+)
 
 
 module.exports = router;
