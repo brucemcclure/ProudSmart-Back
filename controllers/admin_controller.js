@@ -40,7 +40,7 @@ async function approve(req, res) {
     document.educatorStatus = "approved";
     document.userType = "educator";
   } else {
-    document.approved = true
+    document.approvalStatus = "approved"
   }
   try {
     await document.save();
@@ -50,8 +50,30 @@ async function approve(req, res) {
   }
 };
 
+// deny enables the admin to deny either a course or an educator 
+// deny expects two pieces of data in the body of the request:
+//   > the type of document (i.e. user or course)
+//   > the document to deny
+// If the document is a course then the course 
+async function deny(req, res) {
+  const {type, document} = req.body;
+  if (type === "user") {
+    document.educatorStatus = "denied";
+  } else {
+    document.approvalStatus = "denied"
+  }
+  try {
+    await document.save();
+    return res.json(document);
+  } catch (err) {
+    return res.send(err)
+  }
+};
+
+
 module.exports = {
   educatorApplications,
   courseApplications,
-  approve
+  approve,
+  deny
 }

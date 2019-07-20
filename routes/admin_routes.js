@@ -20,4 +20,10 @@ router.post(
   AdminController.approve
 );
 
+// route to deny application
+router.post(
+  "/deny-application", 
+  AdminController.deny
+);
+
 module.exports = router;

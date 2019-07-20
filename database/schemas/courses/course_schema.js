@@ -47,8 +47,11 @@ const CourseSchema = new Schema({
     type: Number,
     required: true
   },
-  approved: {
-    type: Boolean
+  approvalStatus: {
+    type: String,
+    enum: ["applied", "approved", "denied"],
+    default: "applied"
+
   }
 });
 

@@ -12,7 +12,7 @@ async function index (req, res) {
 // two variables are returned
 //   > All the user document; and
 //   > The courses recommeneded to the user
-async function dashboard () {
+async function dashboard (req, res) {
   // STILL TO IMPLEMENT RECOMMENDED COURSES
   return res.send(req.user);
 };
@@ -24,9 +24,26 @@ function accountInfo (req, res) {
   return res.json(req.user);
 };
 
+// educatorsIndex returns a response object with all of the user documents matching the following query paramaters:
+//   > usertype = educator
+// This should return both approved educators and those users who have applied to be an educator
+async function educatorIndex (req, res) {
+  try {
+    const educators = UserModel.find({
+      $or: [
+        {educatorStatus: "applied"},
+        {educatorStatus: "approved"}
+      ] 
+    });
+    return res.json(educators);
+  } catch (err) {
+    return res.send(err);
+  }
+};
 
 module.exports = {
   index,
   dashboard,
-  accountInfo
+  accountInfo,
+  educatorIndex
 };
