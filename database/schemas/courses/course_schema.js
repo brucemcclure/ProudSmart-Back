@@ -50,7 +50,7 @@ const CourseSchema = new Schema({
   approvalStatus: {
     type: String,
     enum: ["applied", "approved", "denied"],
-    defualt: "applied"
+    default: "applied"
 
   }
 });
