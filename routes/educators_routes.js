@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UsersController = require("./../controllers/users_controller");
 const passport = require("passport");
+const {checkRole} = require("./../middleware/auth_middleware.js")
 
 // route to request all of the educators and educator applications in the database
 // only admin has access to this data
