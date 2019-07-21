@@ -75,7 +75,11 @@ const generateEducators = async () => {
       interestTags: _.sampleSize(interestTags, 2),
       userType: "educator",
       //needs to be addressesd
-      qualifications: _.sampleSize(qualifications, 3),
+      qualifications: [{
+        type: "Graduate Diploma",
+        date: new Date(),
+        institution: "Hogwarts"
+      }],
       aboutMe: faker.lorem.paragraph(),
       teachingTags: _.sampleSize(qualifications, 3)
     });

@@ -25,7 +25,7 @@ function accountInfo (req, res) {
 };
 
 // educatorsIndex returns a response object with all of the user documents matching the following query paramaters:
-//   > usertype = educator
+//   > usertype = "educator"
 // This should return both approved educators and those users who have applied to be an educator
 async function educatorIndex (req, res) {
   try {
@@ -41,9 +41,34 @@ async function educatorIndex (req, res) {
   }
 };
 
+// educatorShow returns a response object containing all the information necessary to display a given educator's profile 
+async function educatorShow (req, res, next) {
+  const id = req.params.id;
+  try {
+    const educator = UserModel.findById(id, {
+      firstName: 1,
+      lastName: 1,
+      profilePhotoUrl: 1,
+      aboutMe: 1,
+      qualifications: 1,
+      educatorStatus: 1
+    });
+
+    // educator should be returned if their status has been set to approved by the admin
+    if (educator.educatorStatus !== "approved") {
+      return next(new HTTPError(422, "educator has not been approved"));
+    }
+
+    return res.json(educator);
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
 module.exports = {
   index,
   dashboard,
   accountInfo,
-  educatorIndex
+  educatorIndex,
+  educatorShow
 };

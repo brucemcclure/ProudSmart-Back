@@ -1,5 +1,6 @@
 const { Schema } = require("mongoose");
 const PurchasedCoursesSchema = require("./purchased_courses_schema.js");
+const QualificationSchema = require("./qualifications_schema.js")
 
 const UserSchema = new Schema({
   email: {
@@ -38,9 +39,7 @@ const UserSchema = new Schema({
     default: "not"
   },
   purchasedCourses: [PurchasedCoursesSchema],
-  qualifications: {
-    type: Array
-  },
+  qualifications: [QualificationSchema],
   aboutMe: {
     type: String
   },

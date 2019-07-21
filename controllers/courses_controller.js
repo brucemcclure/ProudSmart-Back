@@ -26,7 +26,7 @@ async function index(req, res) {
 }
 
 // show returns a response with information for the user to preview a course
-async function show(req, res) {
+async function show(req, res, next) {
   try {
     const course = await CourseModel.findById(req.params.id, {
       title: 1,
