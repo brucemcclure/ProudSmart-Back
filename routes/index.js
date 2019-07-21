@@ -7,7 +7,7 @@ const PaymentsRoutes = require("./payments_routes");
 const AdminRoutes = require("./admin_routes.js");
 const ProfileImgRoutes = require("./profileImage_routes");
 const videoRoutes = require("./courseVideo_routes");
-const EducatorsRoutes = require("./eductorsRoutes")
+const EducatorsRoutes = require("./educators_routes")
 const passport = require("passport");
 const { checkRole } = require("./../middleware/auth_middleware");
 
