@@ -29,12 +29,14 @@ function accountInfo (req, res) {
 // This should return both approved educators and those users who have applied to be an educator
 async function educatorIndex (req, res) {
   try {
-    const educators = UserModel.find({
+    const educators = await UserModel.find({
       $or: [
         {educatorStatus: "applied"},
         {educatorStatus: "approved"}
       ] 
     });
+
+    console.log(educators);
     return res.json(educators);
   } catch (err) {
     return res.send(err);

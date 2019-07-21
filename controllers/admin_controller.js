@@ -37,15 +37,20 @@ async function courseApplications(req, res) {
 async function approve(req, res) {
   const {type, document} = req.body;
   if (type === "user") {
+    console.log("yar")
+    console.log(document.educatorStatus);
     document.educatorStatus = "approved";
     document.userType = "educator";
+    console.log(document.educatorStatus);
   } else {
     document.approvalStatus = "approved"
   }
   try {
-    await document.save();
+    const record = await UserModel.findByIdAndUpdate(document._id, document);
+    await record.save();
     return res.json(document);
   } catch (err) {
+    console.log(err)
     return res.send(err)
   }
 };

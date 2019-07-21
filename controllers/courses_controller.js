@@ -152,7 +152,7 @@ async function update(req, res) {
       chapters,
       price
     });
-    await course.save;
+    await course.save();
     return res.json(course);
   } catch (err) {
     return res.send(err);
