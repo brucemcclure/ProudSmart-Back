@@ -42,7 +42,7 @@ async function educatorIndex (req, res) {
 };
 
 // educatorShow returns a response object containing all the information necessary to display a given educator's profile 
-async function educatorShow (req, res) {
+async function educatorShow (req, res, next) {
   const id = req.params.id;
   try {
     const educator = UserModel.findById(id, {
@@ -54,7 +54,10 @@ async function educatorShow (req, res) {
       educatorStatus: 1
     });
 
-    // educator should be returned if their status has been set to applied
+    // educator should be returned if their status has been set to approved by the admin
+    if (educator.educatorStatus !== "approved") {
+      return next(new HTTPError(422, "educator has not been approved"));
+    }
 
     return res.json(educator);
   } catch (err) {
