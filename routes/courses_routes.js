@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const CoursesController = require("../controllers/courses_controller");
-const {checkCourseOwner} = require("./../middleware/auth_middleware.js");
+const {checkRole, checkCourseOwner} = require("./../middleware/auth_middleware.js");
 const passport = require("passport");
 
 // Route to request a list of all the courses in the database
@@ -31,7 +31,9 @@ router.get(
 router.post(
   "/", 
   passport.authenticate("jwt", {session: false}), 
-  checkCourseOwner,
+  function(req, res, next) {
+    checkRole(req, res, next, ["admin", "educator"]);
+  }, 
   CoursesController.create
 );
 router.put(
