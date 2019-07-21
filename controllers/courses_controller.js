@@ -89,7 +89,8 @@ async function create(req, res) {
   const {
     title,
     description,
-    educator,
+    educator = req.user.firstName,
+    educatorId = req.user.id,
     interestTags,
     materialsUrl,
     courseProfilePictureUrl,
@@ -104,7 +105,7 @@ async function create(req, res) {
       title,
       description,
       educator,
-      educatorId: req.user.id,
+      educatorId,
       interestTags,
       materialsUrl,
       courseProfilePictureUrl,
@@ -121,11 +122,13 @@ async function create(req, res) {
 }
 
 // update a course in the database
+// MAKE SURE THERE IS EDUCATOR AND EDUCATORID FIELDS COND RENDERED FOR ADMIN 
 async function update(req, res) {
   const {
     title,
     description,
-    teacher,
+    educator = req.user.firstName,
+    educatorId = req.user.id,
     interestTags,
     materialsUrl,
     courseProfilePictureUrl,
