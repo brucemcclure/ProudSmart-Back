@@ -1,10 +1,12 @@
 const { Schema } = require("mongoose");
 const PurchasedCoursesSchema = require("./purchased_courses_schema.js");
+const QualificationSchema = require("./qualifications_schema.js")
 
 const UserSchema = new Schema({
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   firstName: {
     type: String,
@@ -33,13 +35,11 @@ const UserSchema = new Schema({
   },
   educatorStatus: {
     type: String,
-    enum: ["not", "applied", "approved"],
+    enum: ["not", "applied", "approved", "denied"],
     default: "not"
   },
   purchasedCourses: [PurchasedCoursesSchema],
-  qualifications: {
-    type: Array
-  },
+  qualifications: [QualificationSchema],
   aboutMe: {
     type: String
   },
