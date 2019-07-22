@@ -68,9 +68,11 @@ async function deny(req, res) {
     document.approvalStatus = "denied"
   }
   try {
-    await document.save();
+    const record = await UserModel.findByIdAndUpdate(document._id, document);
+    await record.save()
     return res.json(document);
   } catch (err) {
+    console.log(err)
     return res.send(err)
   }
 };
