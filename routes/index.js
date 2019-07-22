@@ -5,8 +5,10 @@ const UsersRoutes = require("./users_routes");
 const CoursesRoutes = require("./courses_routes");
 const PaymentsRoutes = require("./payments_routes");
 const AdminRoutes = require("./admin_routes.js");
-const ProfileImgRoutes = require("./profileImage_routes");
-const videoRoutes = require("./courseVideo_routes");
+const ProfileImgRoutes = require("./profileImage_routes"); //Joshua
+const videoRoutes = require("./courseVideo_routes"); //Joshua
+const courseProfileImgRoutes = require("./courseProfileImg_routes"); //Joshua
+const courseDocfilesRoutes = require("./courseDocs_routes"); //Joshua
 const passport = require("passport");
 const { checkRole } = require("./../middleware/auth_middleware");
 
@@ -38,7 +40,9 @@ router.use(
   AdminRoutes
 );
 
-router.use("/image-upload", ProfileImgRoutes); //Joshua, change this test to a proper router name if you want
-router.use("/video-upload", videoRoutes);
+router.use("/image-upload", ProfileImgRoutes); //Joshua: user profile  image-upload route
+router.use("/image-upload", courseProfileImgRoutes); //Joshua: course profile image-upload route
+router.use("/video-upload", videoRoutes); //single video file upload route
+router.use("/docs-upload", courseDocfilesRoutes); //multiple files upload route
 
 module.exports = router;
