@@ -46,8 +46,8 @@ async function show(req, res, next) {
 
     // restrict access to only courses which have been approved
     if (course.approvalStatus !== "approved") {
-      return next(new HTTPError(422, "This course has not been approved"))
-    };
+      return next(new HTTPError(422, "This course has not been approved"));
+    }
 
     return res.json(course);
   } catch (err) {
@@ -63,8 +63,8 @@ async function dashboard(req, res, next) {
 
     // restrict access to only courses which have been approved
     if (course.approvalStatus !== "approved") {
-      return next(new HTTPError(422, "This course has not been approved"))
-    };
+      return next(new HTTPError(422, "This course has not been approved"));
+    }
 
     // if the user is an admin or the educator of the course then return the data
     if (user.userType === "admin" || user.id === course.educatorId) {
@@ -86,6 +86,8 @@ async function dashboard(req, res, next) {
 
 // create a new course in the database
 async function create(req, res) {
+  console.log("this is the req.body");
+  console.log(req.body);
   const {
     title,
     description,
@@ -122,13 +124,14 @@ async function create(req, res) {
 }
 
 // update a course in the database
-// MAKE SURE THERE IS EDUCATOR AND EDUCATORID FIELDS COND RENDERED FOR ADMIN 
+// MAKE SURE THERE IS EDUCATOR AND EDUCATORID FIELDS COND RENDERED FOR ADMIN
 async function update(req, res) {
+  console.log(req);
   const {
     title,
     description,
     educator = req.user.firstName,
-    educatorId = req.user.id,
+    educatorId = req.user._id,
     interestTags,
     materialsUrl,
     courseProfilePictureUrl,
@@ -137,7 +140,8 @@ async function update(req, res) {
     keyConcepts,
     chapters,
     price
-  } = req.body;
+  } = req.body.values;
+
   try {
     course = await CourseModel.findByIdAndUpdate(req.params.id, {
       title,
