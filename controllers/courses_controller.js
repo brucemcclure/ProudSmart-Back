@@ -33,6 +33,7 @@ async function show(req, res, next) {
       description: 1,
       educator: 1,
       interestTags: 1,
+      materialsUrl: 1,
       courseProfilePictureUrl: 1,
       certified: 1,
       recommendedPrerequisites: 1,
