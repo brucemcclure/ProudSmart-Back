@@ -118,8 +118,10 @@ async function create(req, res) {
       chapters,
       price
     });
+    console.log(course);
     return res.json(course);
   } catch (err) {
+    console.log(err)
     return res.send(err);
   }
 }

@@ -6,7 +6,7 @@ const CourseModel = require("./../database/models/course_model");
 //   > educatorStatus is "applied" 
 async function educatorApplications(req, res) {
   try {
-    const educatorApplications = UserModel.find(
+    const educatorApplications = await UserModel.find(
       {educatorStatus: "applied"}
     )
     return res.json(educatorApplications);       
@@ -20,9 +20,10 @@ async function educatorApplications(req, res) {
 //   > approved is false (the admin has not approved the course)
 async function courseApplications(req, res) {
   try {
-    const courseApplications = CourseModel.find(
-      {approved: false}
+    const courseApplications = await CourseModel.find(
+      {approvalStatus: "applied"}
     )
+    console.log(courseApplications);
     return res.json(courseApplications);       
   } catch (err) {
     return res.send(err);
