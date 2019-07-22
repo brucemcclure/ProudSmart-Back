@@ -12,9 +12,9 @@ function checkRole(req, res, next, permittedRoles) {
 // checkCourseOwner restricts the ability to edit to coure information unless the user is either:
 //   > Admin; or
 //   > The educator of that course
-// Note this function expects educatorId to come through as a form value
+// Note this function expects the course document and form values to come through in the request object
 function checkCourseOwner(req, res, next) {
-  const {educatorId} = req.body;
+  const {educatorId} = req.body.course;
   const {user} = req.user;
   if (user.userType === "admin" || user.id === educatorId) {
     return next();

@@ -19,12 +19,11 @@ router.get(
   UsersController.dashboard
 );
 
-//  route to request the user's current information 
+// route to request the user's current information 
 router.get(
   "/account-info", 
   UsersController.accountInfo
 );
-
 
 
 module.exports = router;

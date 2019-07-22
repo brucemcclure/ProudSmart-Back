@@ -1,0 +1,180 @@
+{
+  "courses": [
+    {
+      "title": "JavaScript Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/Js.png",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "Ruby Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/Ruby.png",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "Java Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/Java.jpeg",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "C++ Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/C++.jpeg",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "C# Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/C#.jpeg",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "GoLang Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/GoLang.jpeg",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "Dart Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/Dart.jpg",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    },
+    {
+      "title": "Swift Fundamentals",
+      "price": 123.45,
+      "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification",
+      "teacher": "Taught by Ari 'Funky Emu Slayer' Friedgut",
+      "interestTags": ["Programming", "Web Development", "JavaScript"],
+      "materials": ["3 text books", "5 videos"],
+      "totalStudentsEnrolled": 34,
+      "courseProfilePicture": "./../images/Swift.jpg",
+      "courseDuration": 34,
+      "certified": "True",
+      "recommendedPrerequisites": ["fundamentals of programming", "CS50"],
+      "keyConcepts": [
+        "Learning the 'funck' of JS",
+        "Web APIs",
+        "Node",
+        "Express",
+        "Mongo",
+        "React"
+      ],
+      "content": ["", ""]
+    }
+  ]
+}
