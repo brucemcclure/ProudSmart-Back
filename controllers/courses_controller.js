@@ -167,10 +167,11 @@ async function update(req, res) {
 // delete a course in the database
 async function destroy(req, res) {
   try {
-    let course = CourseModel.findByIdAndDelete(req.params.id);
-    course.save();
+    const course = await CourseModel.findByIdAndDelete(req.params.id);
+    await course.save();
     return res.json(course);
   } catch (err) {
+    console.log(err);
     return res.send(err);
   }
 }

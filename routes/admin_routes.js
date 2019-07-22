@@ -15,13 +15,13 @@ router.get(
 );
 
 // route to approve application
-router.post(
+router.put(
   "/approve-application", 
   AdminController.approve
 );
 
 // route to deny application
-router.post(
+router.put(
   "/deny-application", 
   AdminController.deny
 );

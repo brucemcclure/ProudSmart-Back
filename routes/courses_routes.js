@@ -45,7 +45,9 @@ router.put(
 router.delete(
   "/:id", 
   passport.authenticate("jwt", {session: false}), 
-  checkCourseOwner,
+  function(req, res, next) {
+    checkRole(req, res, next, ["admin"]);
+  },
   CoursesController.destroy
 );
 
