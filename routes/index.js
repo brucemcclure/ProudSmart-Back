@@ -5,6 +5,7 @@ const UsersRoutes = require("./users_routes");
 const CoursesRoutes = require("./courses_routes");
 const PaymentsRoutes = require("./payments_routes");
 const AdminRoutes = require("./admin_routes.js");
+const EducatorsRoutes = require("./educators_routes.js")
 
 const ProfileImgRoutes = require("./profileImage_routes"); //Joshua
 const videoRoutes = require("./courseVideo_routes"); //Joshua
