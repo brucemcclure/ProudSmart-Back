@@ -39,6 +39,7 @@ async function educatorIndex (req, res) {
     console.log(educators);
     return res.json(educators);
   } catch (err) {
+    console.log(err);
     return res.send(err);
   }
 };

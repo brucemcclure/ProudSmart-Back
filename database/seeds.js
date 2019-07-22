@@ -74,6 +74,7 @@ const generateEducators = async () => {
       profilePhotoUrl: faker.internet.url(),
       interestTags: _.sampleSize(interestTags, 2),
       userType: "educator",
+      educatorStatus: "approved",
       //needs to be addressesd
       qualifications: [{
         type: "Graduate Diploma",
