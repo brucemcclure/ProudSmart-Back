@@ -36,8 +36,9 @@ async function educatorApplication(req, res) {
   user.qualifications = qualifications;
   user.aboutMe = aboutMe;
   user.teachingTags = teachingTags;
+  user.educatorStatus = "applied";
   try {
-    await user.save;
+    await user.save();
     return res.json(user);
   } catch (err) {
     return res.send(err);

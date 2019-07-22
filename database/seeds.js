@@ -67,7 +67,7 @@ const generateEducators = async () => {
   for (let i = 0; i < 10; i++) {
     console.log(`Creating educator ${i + 1}`);
     const user = new UserModel({
-      email: faker.internet.email(),
+      email: `educator${i+1}@proudsmart.com`,
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       password: "mrpickles", //this well need to be addressed
@@ -75,7 +75,11 @@ const generateEducators = async () => {
       interestTags: _.sampleSize(interestTags, 2),
       userType: "educator",
       //needs to be addressesd
-      qualifications: _.sampleSize(qualifications, 3),
+      qualifications: [{
+        type: "Graduate Diploma",
+        date: new Date(),
+        institution: "Hogwarts"
+      }],
       aboutMe: faker.lorem.paragraph(),
       teachingTags: _.sampleSize(qualifications, 3)
     });
@@ -140,7 +144,8 @@ const generateCourses = async (chapters, educators) => {
       recommendedPrerequisites: _.sampleSize(recommendedPrerequisites, 2),
       keyConcepts: _.sampleSize(keyConcepts, 2),
       chapters: _.sampleSize(chapters, 5),
-      price: _.random(100)
+      price: _.random(100),
+      approvalStatus: "approved"
     });
     courses.push(course);
     // console.log(course.title, courses.length);
@@ -177,7 +182,7 @@ const generateUsers = async (purchasedCourses) => {
   for (let i = 0; i < 10; i++) {
     console.log(`Creating user ${i + 1}`);
     const user = new UserModel({
-      email: faker.internet.email(),
+      email: `user${i+1}@proudsmart.com`,
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       password: "mrpickles", //this well need to be addressed
@@ -202,13 +207,41 @@ const generateUsers = async (purchasedCourses) => {
   return users;
 }
 
+const generateAdmin = async () => {
+    console.log(`Creating Admin`);
+    const admin = new UserModel({
+      email: "admin@proudsmart.com",
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      password: "mrpickles", //this well need to be addressed
+      profilePhotoUrl: faker.internet.url(),
+      interestTags: _.sampleSize(interestTags, 2),
+      userType: "admin"
+    });
+    // console.log(user.purchasedCourses)
+    const saveUser = async () => {
+      try {
+        await admin.save();
+      } catch {
+        console.log("why is this me")
+        console.log("********ERROR***********");
+      }
+    };
+    saveUser();
+  
+  
+  return admin;
+};
+
 const populateDatabase = async () => {
+
   const educators = await generateEducators();
   const topics = generateTopics();
   const chapters = generateChapters(topics);
   const courses = await generateCourses(chapters, educators);
   const purchasedCourses = await pickPurchasedCourses(courses);
   const users = await generateUsers(purchasedCourses);
+  const admin = await generateAdmin();
 }
 
 populateDatabase();
