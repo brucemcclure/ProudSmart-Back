@@ -154,7 +154,7 @@ const courseDocsUpload = multer({
 // @return {*}
 function checkDocFilesType(file, cb) {
   // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif|docx/;
+  const filetypes = /jpeg|jpg|png|gif|docx|ppt|pdf/;
   // Check ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   /**  Check mime
@@ -165,7 +165,7 @@ function checkDocFilesType(file, cb) {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb("Error: jpeg/jpg/png/gif/docx files Only!");
+    cb("Error: jpeg/jpg/png/gif/docx/ppt files Only!");
   }
 }
 
