@@ -9,6 +9,14 @@ async function index(req, res) {
       description: 1,
       educator: 1,
       interestTags: 1,
+      courseProfilePictureUrl: 1,
+      certified: 1,
+      recommendedPrerequisites: 1,
+      keyConcepts: 1,
+      "chapters.title": 1,
+      "chapters.description": 1,
+      "chapters.topics.title": 1,
+      "chapters.topics.description": 1,
       price: 1
     }
   );
@@ -23,6 +31,7 @@ async function show(req, res) {
       description: 1,
       educator: 1,
       interestTags: 1,
+      materialsUrl: 1,
       courseProfilePictureUrl: 1,
       certified: 1,
       recommendedPrerequisites: 1,
