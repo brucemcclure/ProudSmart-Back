@@ -22,16 +22,15 @@ const recommendedPrerequisites = [
   "fundamentals of GoLang"
 ];
 const keyConcepts = [
-  ["Learning async JS", "Web APIs", "Node", "Express", "Mongo", "React"]
+  "Learning async JS",
+  "Web APIs",
+  "Node",
+  "Express",
+  "Mongo",
+  "React"
 ];
 
-const courseTitles = [
-  "intro",
-  "maths",
-  "stats",
-  "algebra",
-  "grammar"
-]
+const courseTitles = ["intro", "maths", "stats", "algebra", "grammar"];
 
 const qualifications = [
   "Three Year Bachelor Pass Degree",
@@ -97,37 +96,31 @@ const generateEducators = async () => {
   return educators;
 };
 
-
 const generateTopics = () => {
   let topics = [];
   for (let i = 0; i < 100; i++) {
     console.log(`Creating topics ${i + 1}`);
-    topics.push(
-      {
-        title: faker.random.word(),
-        description: faker.lorem.sentence(),
-        videoUrl: faker.internet.url()
-      }
-    )
+    topics.push({
+      title: faker.random.word(),
+      description: faker.lorem.sentence(),
+      videoUrl: faker.internet.url()
+    });
   }
   return topics;
-}
+};
 
-const generateChapters = (topics) => {
+const generateChapters = topics => {
   let chapters = [];
   for (let i = 0; i < 100; i++) {
     console.log(`Creating chapters ${i + 1}`);
-    chapters.push(
-      {
-        title: faker.random.word(),
-        description: faker.lorem.sentence(),
-        topics: _.sampleSize(topics, 5)
-      }
-    )
+    chapters.push({
+      title: faker.random.word(),
+      description: faker.lorem.sentence(),
+      topics: _.sampleSize(topics, 5)
+    });
   }
   return chapters;
 };
-
 
 const generateCourses = async (chapters, educators) => {
   let courses = [];
@@ -137,7 +130,7 @@ const generateCourses = async (chapters, educators) => {
       title: _.sampleSize(courseTitles, 1),
       description: faker.lorem.paragraph(),
       educator: "chicken",
-      educatorId: educators[_.random(1,educators.length-1)].id,
+      educatorId: educators[_.random(1, educators.length - 1)].id,
       interestTags: _.sampleSize(interestTags, 3),
       materialsUrl: _.sampleSize(materials, 2),
       courseProfilePictureUrl: "www.chicken.com",
@@ -160,25 +153,25 @@ const generateCourses = async (chapters, educators) => {
     saveCourse();
   }
   return courses;
-}
+};
 
-const pickPurchasedCourses = async (courses) => {
+const pickPurchasedCourses = async courses => {
   let purchasedCourses = [];
-  for (i = 0; i < _.random(1,courses.length); i++) {
-    let randNum = _.random(1, courses.length-1);
+  for (i = 0; i < _.random(1, courses.length); i++) {
+    let randNum = _.random(1, courses.length - 1);
     // console.log(`courses length is ${courses.length}. RandNum is ${randNum}`);
-    let randomCourse = courses[randNum]; 
+    let randomCourse = courses[randNum];
     purchasedCourses.push({
       courseId: randomCourse.id,
       title: randomCourse.title,
       courseProfilePictureUrl: randomCourse.courseProfilePictureUrl,
       description: randomCourse.description
-    })
+    });
   }
   return purchasedCourses;
-}
+};
 
-const generateUsers = async (purchasedCourses) => {
+const generateUsers = async purchasedCourses => {
   let users = [];
   for (let i = 0; i < 10; i++) {
     console.log(`Creating user ${i + 1}`);
@@ -189,7 +182,7 @@ const generateUsers = async (purchasedCourses) => {
       password: "mrpickles", //this well need to be addressed
       profilePhotoUrl: faker.internet.url(),
       interestTags: _.sampleSize(interestTags, 2),
-      purchasedCourses: _.sampleSize(purchasedCourses,3)
+      purchasedCourses: _.sampleSize(purchasedCourses, 3)
     });
     // console.log(user.purchasedCourses)
     const saveUser = async () => {
@@ -201,12 +194,10 @@ const generateUsers = async (purchasedCourses) => {
     };
     saveUser();
     users.push(user);
-    
-  };
-  
-  
+  }
+
   return users;
-}
+};
 
 const generateAdmin = async () => {
     console.log(`Creating Admin`);
@@ -244,6 +235,7 @@ const populateDatabase = async () => {
   const users = await generateUsers(purchasedCourses);
   const admin = await generateAdmin();
 }
+
 
 populateDatabase();
 
