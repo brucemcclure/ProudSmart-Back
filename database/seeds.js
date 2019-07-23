@@ -252,6 +252,7 @@ const populateDatabase = async () => {
   const courses = await generateCourses(chapters, educators);
   const purchasedCourses = await pickPurchasedCourses(courses);
   const users = await generateUsers(purchasedCourses);
+  const admin = await generateAdmin();
 };
 
 populateDatabase();
