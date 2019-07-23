@@ -14,7 +14,6 @@ async function index(req, res) {
 //   > The courses recommeneded to the user
 async function dashboard(req, res) {
   // STILL TO IMPLEMENT RECOMMENDED COURSES
-  console.log(req.body);
   return res.send(req.user);
 }
 
@@ -32,11 +31,12 @@ async function educatorIndex(req, res) {
   try {
     const educators = await UserModel.find({
       $or: [{ educatorStatus: "applied" }, { educatorStatus: "approved" }]
-    });
+    }).sort({ educatorStatus: 1 });
 
     console.log(educators);
     return res.json(educators);
   } catch (err) {
+    console.log(err);
     return res.send(err);
   }
 }

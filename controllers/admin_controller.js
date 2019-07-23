@@ -6,7 +6,7 @@ const CourseModel = require("./../database/models/course_model");
 //   > educatorStatus is "applied" 
 async function educatorApplications(req, res) {
   try {
-    const educatorApplications = UserModel.find(
+    const educatorApplications = await UserModel.find(
       {educatorStatus: "applied"}
     )
     return res.json(educatorApplications);       
@@ -20,9 +20,10 @@ async function educatorApplications(req, res) {
 //   > approved is false (the admin has not approved the course)
 async function courseApplications(req, res) {
   try {
-    const courseApplications = CourseModel.find(
-      {approved: false}
+    const courseApplications = await CourseModel.find(
+      {approvalStatus: "applied"}
     )
+    console.log(courseApplications);
     return res.json(courseApplications);       
   } catch (err) {
     return res.send(err);
@@ -36,18 +37,17 @@ async function courseApplications(req, res) {
 // The approved document is returned in the response object
 async function approve(req, res) {
   const {type, document} = req.body;
-  if (type === "user") {
-    console.log("yar")
-    console.log(document.educatorStatus);
-    document.educatorStatus = "approved";
-    document.userType = "educator";
-    console.log(document.educatorStatus);
-  } else {
-    document.approvalStatus = "approved"
-  }
+  
   try {
-    const record = await UserModel.findByIdAndUpdate(document._id, document);
-    await record.save();
+    let record;
+    if (type === "user") {
+      document.educatorStatus = "approved";
+      document.userType = "educator";
+      record = await UserModel.findByIdAndUpdate(document._id, document);
+    } else {
+      document.approvalStatus = "approved"
+      record = await CourseModel.findByIdAndUpdate(document._id, document);
+    }
     return res.json(document);
   } catch (err) {
     console.log(err)
@@ -62,15 +62,18 @@ async function approve(req, res) {
 // If the document is a course then the course 
 async function deny(req, res) {
   const {type, document} = req.body;
-  if (type === "user") {
-    document.educatorStatus = "denied";
-  } else {
-    document.approvalStatus = "denied"
-  }
   try {
-    await document.save();
+    let record;
+    if (type === "user") {
+      document.educatorStatus = "denied";
+      record = await UserModel.findByIdAndUpdate(document._id, document);
+    } else {
+      document.approvalStatus = "denied";
+      record = await CourseModel.findByIdAndUpdate(document._id, document);
+    }
     return res.json(document);
   } catch (err) {
+    console.log(err);
     return res.send(err)
   }
 };

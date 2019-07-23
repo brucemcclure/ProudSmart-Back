@@ -21,8 +21,8 @@ async function register(req, res) {
     });
 
     const token = JWTService.generateToken(user);
-
-    return res.json(token);
+    const userType = user.userType;
+    return res.json({userType, token});
   } catch (err) {
     return res.send(err);
   }
@@ -50,7 +50,9 @@ async function educatorApplication(req, res) {
 function login(req, res, next) {
   const { user } = req;
   const token = JWTService.generateToken(user);
-  return res.json(token);
+  const userType = user.userType;
+  const userId = user._id;
+  return res.json({userInfo: {userId, userType}, token});
 }
 
 // edit enables a user to edit account information
