@@ -42,16 +42,18 @@ async function show(req, res, next) {
       "chapters.description": 1,
       "chapters.topics.title": 1,
       "chapters.topics.description": 1,
-      price: 1
+      price: 1,
+      approvalStatus: 1
     });
 
     // restrict access to only courses which have been approved
-    if (req.user.userType !== "admin" || course.approvalStatus !== "approved") {
+    if ((req.user && req.user.userType !== "admin") || course.approvalStatus !== "approved") {
       return next(new HTTPError(422, "This course has not been approved"));
     }
 
     return res.json(course);
   } catch (err) {
+    console.log(err);
     return res.send(err);
   }
 }
@@ -62,8 +64,9 @@ async function dashboard(req, res, next) {
   try {
     let course = await CourseModel.findById(req.params.id);
 
+    
     // restrict access to only courses which have been approved
-    if (req.user.userType !== "admin" || course.approvalStatus !== "approved") {
+    if ((req.user && req.user.userType !== "admin") || course.approvalStatus !== "approved") {
       return next(new HTTPError(422, "This course has not been approved"));
     }
 
