@@ -43,11 +43,12 @@ async function show(req, res, next) {
       "chapters.topics.title": 1,
       "chapters.topics.description": 1,
       price: 1,
-      approvalStatus: 1
+      approvalStatus: 1,
+      _id: 1
     });
 
     // restrict access to only courses which have been approved
-    if ((req.user && req.user.userType !== "admin") || course.approvalStatus !== "approved") {
+    if (course.approvalStatus !== "approved" && (req.user && req.user.userType !== "admin")) {
       return next(new HTTPError(422, "This course has not been approved"));
     }
 
@@ -64,12 +65,10 @@ async function dashboard(req, res, next) {
   try {
     let course = await CourseModel.findById(req.params.id);
 
-    
     // restrict access to only courses which have been approved
-    if ((req.user && req.user.userType !== "admin") || course.approvalStatus !== "approved") {
+    if (course.approvalStatus !== "approved" && (req.user && req.user.userType !== "admin")) {
       return next(new HTTPError(422, "This course has not been approved"));
     }
-
     // if the user is an admin or the educator of the course then return the data
     if (user.userType === "admin" || user.id === course.educatorId) {
       return res.json(course);
