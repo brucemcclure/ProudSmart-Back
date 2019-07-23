@@ -15,17 +15,20 @@ router.post("/multiple-files-upload", (req, res) => {
         res.json("Error: No File Selected");
       } else {
         // If Success
-        let fileArray = req.files,
-          fileLocation;
+        let fileArray = req.files;
         const docsLocationArray = [];
+        const docsNameArray = [];
         for (let i = 0; i < fileArray.length; i++) {
-          fileLocation = fileArray[i].location;
+          let fileLocation = fileArray[i].location;
+          let fileName = fileArray[i].key;
           console.log("file_url", fileLocation);
           docsLocationArray.push(fileLocation);
+          console.log("file_name", fileName);
+          docsNameArray.push(fileName);
         }
         // Save the file name into database
         res.json({
-          filesArray: fileArray,
+          filesArray: docsNameArray,
           locationArray: docsLocationArray
         });
       }
