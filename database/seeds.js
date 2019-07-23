@@ -61,6 +61,15 @@ const qualifications = [
   "Honorary Doctoral Degree"
 ];
 
+const topicsURL = [
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/videos/1-1563854513115.mp4",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/videos/2-1563854544163.mp4",
+  "https://proudsmarts3bucket.s3-ap-southeast-2.amazonaws.com/videos/1-1563771768815.mp4",
+  "https://proudsmarts3bucket.s3-ap-southeast-2.amazonaws.com/videos/2-1563790101758.mp4",
+  "https://proudsmarts3bucket.s3-ap-southeast-2.amazonaws.com/videos/3-1563782368898.mp4",
+  "https://proudsmarts3bucket.s3-ap-southeast-2.amazonaws.com/videos/4-1563845163354.mp4"
+];
+
 const generateEducators = async () => {
   const educators = [];
   for (let i = 0; i < 10; i++) {
@@ -105,7 +114,7 @@ const generateTopics = () => {
     topics.push({
       title: faker.random.word(),
       description: faker.lorem.sentence(),
-      videoUrl: faker.internet.url()
+      videoUrl: _.sampleSize(topicsURL, 1)
     });
   }
   return topics;
