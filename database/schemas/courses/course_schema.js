@@ -32,7 +32,7 @@ const CourseSchema = new Schema({
   },
   certified: {
     type: Boolean,
-    required: true
+    default: false
   },
   recommendedPrerequisites: {
     type: Array,

@@ -34,7 +34,7 @@ async function educatorIndex (req, res) {
         {educatorStatus: "applied"},
         {educatorStatus: "approved"}
       ] 
-    });
+    }).sort({educatorStatus: 1});
 
     console.log(educators);
     return res.json(educators);
