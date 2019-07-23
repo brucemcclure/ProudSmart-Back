@@ -1,4 +1,5 @@
 const UserModel = require("./../database/models/user_model");
+const CourseModel = require('./../database/models/course_model.js');
 
 // index returns all the users in the database
 // this data is used in the users index page
@@ -45,7 +46,7 @@ async function educatorIndex(req, res) {
 async function educatorShow(req, res, next) {
   const id = req.params.id;
   try {
-    const educator = UserModel.findById(id, {
+    const educator = await UserModel.findById(id, {
       firstName: 1,
       lastName: 1,
       profilePhotoUrl: 1,
@@ -54,13 +55,30 @@ async function educatorShow(req, res, next) {
       educatorStatus: 1
     });
 
+    const taughtCourses = await CourseModel.find({
+      educatorId: id
+    }, {
+      title: 1,
+      description: 1,
+      price: 1,
+      courseProfilePictureUrl: 1
+    })
+
     // educator should be returned if their status has been set to approved by the admin
     if (educator.educatorStatus !== "approved") {
+      console.log("WHEYYYYY!")
       return next(new HTTPError(422, "educator has not been approved"));
     }
 
-    return res.json(educator);
+    console.log("!!!!!!!")
+    console.log(educator)
+    console.log("~~~~~~~~~~")
+    console.log(taughtCourses)
+    console.log("...................")
+
+    return res.json({educator, taughtCourses});
   } catch (err) {
+    console.log(err)
     return res.send(err);
   }
 }
