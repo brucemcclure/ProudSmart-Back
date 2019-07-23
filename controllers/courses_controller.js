@@ -48,7 +48,10 @@ async function show(req, res, next) {
     });
 
     // restrict access to only courses which have been approved
-    if (course.approvalStatus !== "approved" && (req.user && req.user.userType !== "admin")) {
+    if (
+      course.approvalStatus !== "approved" &&
+      (req.user && req.user.userType !== "admin")
+    ) {
       return next(new HTTPError(422, "This course has not been approved"));
     }
 
@@ -66,23 +69,30 @@ async function dashboard(req, res, next) {
     let course = await CourseModel.findById(req.params.id);
 
     // restrict access to only courses which have been approved
-    if (course.approvalStatus !== "approved" && (req.user && req.user.userType !== "admin")) {
+    if (
+      course.approvalStatus !== "approved" &&
+      (req.user && req.user.userType !== "admin")
+    ) {
       return next(new HTTPError(422, "This course has not been approved"));
     }
     // if the user is an admin or the educator of the course then return the data
     if (user.userType === "admin" || user.id === course.educatorId) {
+      console.log("why");
       return res.json(course);
     }
     // else if the user has the course in their purchasedCourses then return the data
     for (let purchasedCourse of user.purchasedCourses) {
       if (purchasedCourse.courseId === req.params.id) {
+        console.log("helllo");
         return res.json(course);
       }
     }
 
     // deny user access to the course
+    console.log(req.user);
     return next(new HTTPError(422, "Unauthorised"));
   } catch (err) {
+    console.log(err);
     return next(err);
   }
 }
@@ -123,7 +133,7 @@ async function create(req, res) {
     console.log(course);
     return res.json(course);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.send(err);
   }
 }
