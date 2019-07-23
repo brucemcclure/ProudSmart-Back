@@ -22,7 +22,8 @@ async function register(req, res) {
 
     const token = JWTService.generateToken(user);
     const userType = user.userType;
-    return res.json({userType, token});
+    const userId = user._id;
+    return res.json({userInfo: {userId, userType}, token});
   } catch (err) {
     return res.send(err);
   }
