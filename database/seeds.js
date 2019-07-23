@@ -61,6 +61,16 @@ const qualifications = [
   "Honorary Doctoral Degree"
 ];
 
+const profilePictureURL = [
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/Ruby-1563855984717.png",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/GoLang-1563856030327.jpeg",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/C%23-1563856065189.jpeg",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/C%2B%2B-1563856107692.jpeg",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/Dart-1563856135385.jpg",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/Java-1563856173627.jpeg",
+  "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/python-1563856288159.png"
+];
+
 const topicsURL = [
   "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/videos/1-1563854513115.mp4",
   "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/videos/2-1563854544163.mp4",
@@ -114,7 +124,7 @@ const generateTopics = () => {
     topics.push({
       title: faker.random.word(),
       description: faker.lorem.sentence(),
-      videoUrl: _.sampleSize(topicsURL, 1)
+      videoUrl: _.sample(topicsURL)
     });
   }
   return topics;
@@ -143,8 +153,8 @@ const generateCourses = async (chapters, educators) => {
       educator: "chicken",
       educatorId: educators[_.random(1, educators.length - 1)].id,
       interestTags: _.sampleSize(interestTags, 3),
-      materialsUrl: _.sampleSize(materials, 2),
-      courseProfilePictureUrl: "www.chicken.com",
+      materialsUrl: _.sampleSize(profilePictureURL, 2),
+      courseProfilePictureUrl: _.sampleSize(profilePictureURL, 1),
       certified: "true",
       recommendedPrerequisites: _.sampleSize(recommendedPrerequisites, 2),
       keyConcepts: _.sampleSize(keyConcepts, 2),
