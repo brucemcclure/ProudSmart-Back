@@ -23,7 +23,7 @@ async function register(req, res) {
     const token = JWTService.generateToken(user);
     const userType = user.userType;
     const userId = user._id;
-    return res.json({userInfo: {userId, userType}, token});
+    return res.json({ userInfo: { userId, userType }, token });
   } catch (err) {
     return res.send(err);
   }
@@ -53,8 +53,14 @@ function login(req, res, next) {
   const token = JWTService.generateToken(user);
   const userType = user.userType;
   const userId = user._id;
-  const purchasedCoursesIds = user.purchasedCourses.map(course => course.courseId);
-  return res.json({userInfo: {userId, userType}, token, purchasedCoursesIds});
+  const purchasedCoursesIds = user.purchasedCourses.map(
+    course => course.courseId
+  );
+  return res.json({
+    userInfo: { userId, userType },
+    token,
+    purchasedCoursesIds: [...purchasedCoursesIds]
+  });
 }
 
 // edit enables a user to edit account information
