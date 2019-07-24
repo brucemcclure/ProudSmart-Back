@@ -89,7 +89,8 @@ const generateEducators = async () => {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       password: "mrpickles", //this well need to be addressed
-      profilePhotoUrl: faker.internet.url(),
+      profilePhotoUrl:
+        "https://proudsmarts3bucket.s3.ap-southeast-2.amazonaws.com/profile_pictures/academia-1563945421620.jpg",
       interestTags: _.sampleSize(interestTags, 2),
       userType: "educator",
       educatorStatus: "approved",
