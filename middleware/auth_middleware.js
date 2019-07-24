@@ -1,14 +1,30 @@
-// checkRole is a middlewear function to authenticate different user types
+// checkRole is a middleware function to authenticate requests made by different user types
+// it returns an error if the type of user (appended on the request by the passport JWT strategy) is not that specified within the function
 // it takes the usual middlewear arguments in addition to the roles which are permitted for a specific endpoint
 function checkRole(req, res, next, permittedRoles) {
-  const {user} = req;
-  if (permittedRoles.includes(user.userType)) {
+  if (permittedRoles.includes(req.user.userType)) {
     return next();
   }
 
-  return next(new HttpError(422, "Unauthorised"))
+  return next(new HTTPError(422, "Unauthorised"))
 }
 
+// checkCourseOwner restricts the ability to edit to coure information unless the user is either:
+//   > Admin; or
+//   > The educator of that course
+// Note this function expects the course document and form values to come through in the request object
+function checkCourseOwner(req, res, next) {
+  const {educatorId} = req.body.course;
+  const {user} = req.user;
+  if (user.userType === "admin" || user.id === educatorId) {
+    return next();
+  }
+
+  return next(new HTTPError(422, "Unauthorised"))
+}
+
+
 module.exports = {
-  checkRole
+  checkRole,
+  checkCourseOwner
 }

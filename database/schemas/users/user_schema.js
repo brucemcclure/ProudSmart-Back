@@ -1,9 +1,12 @@
 const { Schema } = require("mongoose");
+const PurchasedCoursesSchema = require("./purchased_courses_schema.js");
+const QualificationSchema = require("./qualifications_schema.js")
 
 const UserSchema = new Schema({
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   firstName: {
     type: String,
@@ -18,7 +21,7 @@ const UserSchema = new Schema({
     required: true,
     bcrypt: true
   },
-  profilePhoto: {
+  profilePhotoUrl: {
     type: String
   },
   interestTags: {
@@ -30,12 +33,13 @@ const UserSchema = new Schema({
     enum: ["user", "educator", "admin"],
     default: "user"
   },
-  purchasedCourses: {
-    type: Array
+  educatorStatus: {
+    type: String,
+    enum: ["not", "applied", "approved", "denied"],
+    default: "not"
   },
-  qualifications: {
-    type: Array
-  },
+  purchasedCourses: [PurchasedCoursesSchema],
+  qualifications: [QualificationSchema],
   aboutMe: {
     type: String
   },
@@ -45,7 +49,7 @@ const UserSchema = new Schema({
 },
 {
   timestamps: true
-},);
+});
 
 UserSchema.plugin(require('mongoose-bcrypt'));
 
