@@ -66,7 +66,6 @@ async function educatorShow(req, res, next) {
 
     // educator should be returned if their status has been set to approved by the admin
     if (educator.educatorStatus !== "approved") {
-      console.log("WHEYYYYY!")
       return next(new HTTPError(422, "educator has not been approved"));
     }
 
