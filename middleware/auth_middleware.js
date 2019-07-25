@@ -15,7 +15,8 @@ function checkRole(req, res, next, permittedRoles) {
 // Note this function expects the course document and form values to come through in the request object
 function checkCourseOwner(req, res, next) {
   const {educatorId} = req.body.course;
-  const {user} = req.user;
+  console.log(req.user)
+  const {user} = req;
   if (user.userType === "admin" || user.id === educatorId) {
     return next();
   }
